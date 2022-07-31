@@ -34,23 +34,26 @@ export default {
   },
 
   data() {
-    return {
-      //  chartData:this.$store.state.performanceData
+    return { 
+      test:''
     };
   },
   created(){
      this.$store.dispatch('fetchPerforamceData');
+     
   },
   computed: {
+     
+    chartData(){
+      // console.log(this.$store.state.performanceData);
+      return this.$store.state.performanceData;
+    },
+     
     initOptions() {
       return {
         width: "auto",
         height: "300px",
       };
-    },
-    chartData(){
-      // console.log(this.$store.state.performanceData);
-      return this.$store.state.performanceData;
     },
     chartOptions() {
       return {
@@ -59,11 +62,14 @@ export default {
           left: "center",
         },
         tooltip: {
-          trigger: 'axis',
+          backgroundColor: "#143774",
+          trigger: "axis",
           transitionDuration: 0,
-          confine: false,
+          alwaysShowContent: true,
           hideDelay: 0,
-          padding: 0,
+          textStyle: {
+            color: "#fff",
+          },
         },
         grid: {
           left: "30px",
@@ -73,9 +79,10 @@ export default {
           containLabel: true,
         },
         xAxis: {
+          name:"dfsadsf",
           type: "category",
           showGrid: false,
-          data: this.xAxisData,
+          data: this.xAxisData, 
           axisLine: {
             show: true,
           },
@@ -91,9 +98,36 @@ export default {
           axisTick: { show: true },
           splitLine: { show: true },
         },
+        
+        visualMap:  {
+          top: 50,
+          right: 0,
+          pieces: [
+            {
+              gte: 0,
+              lt: 50,
+              color: "#df424c",
+              title:'dsfsdafdsfsa' 
+            },
+            {
+              gte: 50,
+              lt: 80,
+              color: "#efbf30",
+              title:'dsfsdafdsfsa' 
+            },
+            {
+              gte: 80,
+              lt: 100,
+              color: "#479447",
+              title:'dsfsdafdsfsa' 
+            },
+          ],
+        },
         series: [
           {
-            data: this.yAxisData,
+            name: `Team Performance Index : % `,
+            data:this.yAxisData,
+            label:'dsfdsfads',
             type: "line",
             symbol: "circle",
             symbolSize: 2,
@@ -104,7 +138,7 @@ export default {
           },
         ],
       };
-    }, 
+    },
     xAxisData() {
       return this.chartData.map((item) => this.formatDate(item.date_ms));
     },
