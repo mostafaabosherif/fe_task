@@ -35,39 +35,12 @@ export default {
 
   data() {
     return {
-      chartData: [
-        {
-          date_ms: 1641772800000,
-          performance: 0.2,
-        },
-        {
-          date_ms: 1641859200000,
-          performance: 0.33,
-        },
-        {
-          date_ms: 1641945600000,
-          performance: 0.53,
-        },
-        {
-          date_ms: 1642032000000,
-          performance: 0.31,
-        },
-        {
-          date_ms: 1642118400000,
-          performance: 0.65,
-        },
-        {
-          date_ms: 1642204800000,
-          performance: 0.88,
-        },
-        {
-          date_ms: 1642291200000,
-          performance: 0.07,
-        },
-      ],
+      //  chartData:this.$store.state.performanceData
     };
   },
-
+  created(){
+     this.$store.dispatch('fetchPerforamceData');
+  },
   computed: {
     initOptions() {
       return {
@@ -75,7 +48,10 @@ export default {
         height: "300px",
       };
     },
-
+    chartData(){
+      // console.log(this.$store.state.performanceData);
+      return this.$store.state.performanceData;
+    },
     chartOptions() {
       return {
         title: {
@@ -128,8 +104,7 @@ export default {
           },
         ],
       };
-    },
-
+    }, 
     xAxisData() {
       return this.chartData.map((item) => this.formatDate(item.date_ms));
     },
