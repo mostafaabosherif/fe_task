@@ -6,6 +6,7 @@ import PerformancePageComponent from './pages/performance-page.vue';
 import PerformanceChartComponent from './components/vue-components/performance-chart.vue';
 import TabelFilter from './components/vue-components/TabelFilter.vue';
 import DateFilter from './components/vue-components/DateFilter.vue';
+import NotFound from './pages//NotFound.vue';
 
 angular.module('appModule', [
   'ui.router',
@@ -29,4 +30,7 @@ angular.module('appModule').directive('vTabelFilter', (createVueComponent) => {
 });
 angular.module('appModule').directive('vDateFilter', (createVueComponent) => {
   return createVueComponent(Vue.component('DateFilter', DateFilter));
+});
+angular.module('appModule').directive('vNotFound', (createVueComponent) => {
+  return createVueComponent(Vue.component('NotFound', NotFound));
 });
